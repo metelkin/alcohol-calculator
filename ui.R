@@ -6,21 +6,23 @@ shinyUI(pageWithSidebar(
 
 	#Panel for file uploading
 	sidebarPanel(
-	
+
 	fileInput('file1', 'Choose CSV File',
 	accept=c('text/csv', 'text/comma-separated-values,text/plain', '.csv')),
 	tags$hr(),
-		
+
 	#Personal parameters
-	radioButtons("sex", "Sex:",
-                 list("Male" = 1,
-                      "Female" = 0),selected="Male"),
+	radioButtons(
+    "sex",
+    "Sex:",
+    choices = list("Male" = 1, "Female" = 0)
+  ),
 
 	numericInput("weight", "Weight (kg):", 70, min=1, max=400),
 	numericInput("height", "Height (cm):", 175, min=20, max=400),
 	numericInput("age", "Age (y):", 25, min=0, max=200),
 	tags$hr(),
-	
+
 	#Alcohol Intake
   h3("Portion 1"),
 	sliderInput("proof", "Proof (%):", 0, min=0, max=100, step=0.1),
@@ -28,7 +30,7 @@ shinyUI(pageWithSidebar(
 	sliderInput("d_time", "Time (h):", min = 0, max = 24, value = 0, step=0.5),
 	checkboxInput("add1", "Add another one"),
 	tags$hr(),
-  
+
 	conditionalPanel(
 	  condition = "input.add1 == true",
 	  h3("Portion 2"),
@@ -37,7 +39,7 @@ shinyUI(pageWithSidebar(
 	  sliderInput("d_time1", "Time (h):", min = 0, max = 24, value = 0, step=0.5),
 	  checkboxInput("add2", "Add another one"),
 	  tags$hr(),
-    
+
 	  conditionalPanel(
 	    condition = "input.add2 == true",
 	    h3("Portion 3"),
@@ -46,7 +48,7 @@ shinyUI(pageWithSidebar(
 	    sliderInput("d_time2", "Time (h):", min = 0, max = 24, value = 0, step=0.5),
 	    checkboxInput("add3", "Add another one"),
 	    tags$hr(),
-      
+
 	    conditionalPanel(
 	      condition = "input.add3 == true",
 	      h3("Portion 4"),
