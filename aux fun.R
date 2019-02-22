@@ -103,7 +103,7 @@ mainLine2<-paste(mainLine2,"\t } \n", sep="")
 cat(mainLine2, file=paste(modelName,".c",sep=""))
 
 ### create DLL
-vvv<-paste("R CMD SHLIB ",modelName,".c", sep="")
+vvv <- paste("R CMD SHLIB ",modelName,".c", sep="")
 system(vvv)
 if (delTemp)
   file.remove(c("RHS.temp.txt","IV.temp.txt","variables.temp.txt",paste(modelName,".o",sep="")))

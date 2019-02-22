@@ -1,14 +1,18 @@
 source("aux fun.R")
 require(deSolve)
 
-## create model ##
-#MODEL <- ru.import.slv("al_07_05")		# import model from .SLV
-#save model ##
-#save(MODEL,file="alc model.rumod") 
+## create model
+# MODEL <- ru.import.slv("al_07_05")		# import model from .SLV
+## save model
+# save(MODEL, file = "alc model.rumod") 
 ## open model ##
 load("alc model.rumod")             #load model
 ## load model ##
-dyn.load(paste0(MODEL$dll,.Platform$dynlib.ext))  	# load .DLL
+compileCode <- paste0("R CMD SHLIB ", MODEL$dll, ".c")
+system(compileCode)
+
+dynLibPath <- paste0(MODEL$dll, .Platform$dynlib.ext)
+dyn.load(dynLibPath)  	# load .DLL
 
 shinyServer(function(input, output, session) {
   data<-reactive({ ###BAC_in
